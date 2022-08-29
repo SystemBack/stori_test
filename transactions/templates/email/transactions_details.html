@@ -1,0 +1,21 @@
+<a href="https://www.storicard.com/">
+    <img src="https://www.storicard.com/_next/static/media/logo.9a85efb3.svg" alt="StoriCard">
+</a>
+<h3>Hello!</h3>
+<p>
+    Here is the information about your transactions.
+</p>
+<p>
+    The Balance is <strong>{{balance}}</strong>
+</p>
+{% for month, number_of_transactions in transactions_months.items %}
+    <p>
+        Number of transactions in {{month}}: <strong>{{number_of_transactions}}</strong>
+    </p>
+{% endfor %}
+<p>
+    Average debit amount: <strong>{{debit_average}}</strong>
+</p>
+<p>
+    Average credit amount: <strong>{{credit_average}}</strong>
+</p>
