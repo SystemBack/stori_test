@@ -1,6 +1,6 @@
 import csv, datetime, io, re
 
-from  decimal import Decimal
+from decimal import Decimal
 from datetime import datetime
 from transactions.models import Update, Transaction
 
@@ -12,12 +12,12 @@ class TransactionsService():
         debit = {"counter": 0, "amount": 0}
         month_transactions_amount = {}
         transactions_months = {}
-        #update = create_update_record = self.__create_update(file, email)
+        update = create_update_record = self.__create_update(file, email)
         data_set = file.read().decode('UTF-8')
         io_string = io.StringIO(data_set)
         next(io_string)
         for transaction in csv.reader(io_string, delimiter=',', quotechar='|'):
-            #self.__create_transaction(transaction, update)
+            self.__create_transaction(transaction, update)
             self.__get_transactions_dates(transactions_months, transaction[1])
             if (transaction[2] == self.CREDIT_CARD):
                 credit["counter"] = credit["counter"] + 1
@@ -26,7 +26,8 @@ class TransactionsService():
                 debit["counter"] = debit["counter"] + 1
                 debit['amount'] = self.__get_amount(debit['amount'], transaction[3])
 
-        #update.update(transactions_amount = credit_counter + debit_counter)
+        update.transactions_amount =  credit["counter"] + debit["counter"]
+        update.save()
 
         return {
             "balance": credit["amount"] + debit["amount"],
@@ -52,13 +53,17 @@ class TransactionsService():
 
     def __create_update(self, file, email):
         name = file.name.split('.')[0]
-        return Update(name = name, email = email).save()
+        update = Update(name = name, email = email)
+        update.save()
+
+        return update
 
     def __create_transaction(self, transaction, update):
+        print(update)
         Transaction(
             transaction_id = transaction[0],
             transaction_date = transaction[1],
-            transaction = transaction[2],
-            is_credit_card = transaction[3],
+            is_credit_card = transaction[2] == self.CREDIT_CARD,
+            transaction = transaction[3],
             update = update,
         ).save()

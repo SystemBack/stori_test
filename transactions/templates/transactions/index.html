@@ -66,11 +66,35 @@
                             </p>
                         </div>
                     </div>
+                    <div class="col-lg-12 order-12 order-lg-12">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Number of transactions</th>
+                              <th scope="col">Created</th>
+                            </tr>
+                          </thead>
+                      <tbody>
+                        {% for update in updates %}
+                            <tr>
+                                <td>{{update.id}}</td>
+                                <td>{{update.name}}</td>
+                                <td>{{update.email}}</td>
+                                <td>{{update.transactions_amount}}</td>
+                                <td>{{update.create_date | timesince}} ago</td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+                  </div>
             </div>
         </div>
         </section>
         <!-- Footer-->
-    <div style="position: fixed; bottom: 0px; width: 100%;" class="py-3 bg-dark text-white">
+    <div class="py-3 bg-dark text-white">
         <div class="container">
             <div class="row">
                 <div class="col-md-7 text-center text-md-left">

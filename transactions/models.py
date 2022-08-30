@@ -5,7 +5,7 @@ from django.db import models
 class Update(models.Model):
     name = models.CharField(max_length=250)
     email = models.EmailField(default=None)
-    transactions_amount = models.IntegerField(default=None)
+    transactions_amount = models.IntegerField(default=None, null=True)
     create_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
