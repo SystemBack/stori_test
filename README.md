@@ -53,7 +53,7 @@ create a new app and copy the key that is generated and puts in that enviroment 
 
 ### Enjoy :D
 
-Go to link [http://0.0.0.0:3000](http://0.0.0.0:3000)
+Go to link [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http://localhost:3000) if you are using Windows
 
 ## Description
 
